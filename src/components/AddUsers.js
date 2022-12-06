@@ -10,20 +10,17 @@ const AddUsers = ({ addUser, toggleAddUser, showAdd }) => {
             return;
         }
         addUser(text);
+
+        setText('');
     }
 
     return (
-        <div className="flex">
-            <button type="button" className="btn btn-primary w-100" style={{transition:'none', backgroundColor:`${showAdd ? 'Red' : 'Blue'}`}} onClick={toggleAddUser}>{showAdd ? 'Close' : 'Add Users'}</button>
+        <div className="d-flex flex-column">
+            <button type="button" className={`btn btn-primary w-100 ${showAdd ? 'bg-danger' : 'bg-primary'}`} style={{transition:'none'}} onClick={toggleAddUser}>{showAdd ? 'Close' : 'Add Users'}</button>
             { showAdd && (
-                <form className='add-form' onSubmit={onSubmit}>
-                    <div className='form-control'>
-                        <label>UserID</label>
-                        <input type='text' placeholder="userID" value={text} onChange={(e)=>setText(e.target.value)}></input>
-                    </div>
-                    <div className='form-control'>
-                        <input type='submit' className='btn btn-block' value='Submit'></input>
-                    </div>
+                <form className='d-flex flex-column' onSubmit={onSubmit}>
+                    <input type='text' className="w-100" placeholder="userID" value={text} onChange={(e)=>setText(e.target.value)}></input>
+                    <input type='submit' className='btn btn-primary' value='Submit'></input>
                 </form>
             ) }
         </div>

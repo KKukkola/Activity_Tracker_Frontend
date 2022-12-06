@@ -10,16 +10,16 @@ const User = ({ user, statusClicked, deleteUser }) => {
     const clickedDelete = () => { deleteUser(user.id); }
 
     return (
-        <div className='list-group-item p-0 py-1 container list-group-item-action bg-primary'>
-            <div className="row align-items-center">
-                <div className="col col-auto">
-                    <img src={ingame} onClick={clickedStatus} alt="status"/>
+        <div className='list-group-item p-0 mb-1 container border-0' style={{fontFamily:'Lato'}}>
+            <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center">
+                    <img src={ingame} className="m-0 p-0 me-2" style={{width:'20px',height:'20px'}}onClick={clickedStatus} alt="status"/>
                 </div>
-                <div className="col ps-0 pe-0">
-                    <div className=".no-hover"><small>{user.name +' '+ user.id}</small></div>
+                <div className="">
+                    <div className=".no-hover" style={{fontSize:'14px'}}>{user.name +' '+ user.id}</div>
                 </div>
-                <div className="col col-auto d-flex">
-                    <button type="button" className="btn btn-close" onClick={clickedDelete}></button>
+                <div className="ms-auto d-flex align-items center">
+                    <button type="button" className="btn btn-close p-0 m-0" style={{width:'15px',height:'15px'}} onClick={clickedDelete}></button>
                 </div>
             </div>
         </div>
