@@ -1,16 +1,35 @@
 import { useState } from 'react';
 
-const AddUsers = ({ addUser, toggleAddUser, showAdd }) => {
+import { useMyContext } from '../MyContext'
+
+const AddUsers = () => {
+    const { users, setUsers } = useMyContext();
     const [text, setText] = useState('');
-    
-    const onSubmit = (e) => {
+    const [showAdd, setShowAdd] = useState(false);
+
+    function toggleAddUser() {
+        setShowAdd(!showAdd);
+    }
+
+	function AddUser(id) {
+		id = parseInt(id);
+		if (users.find(u => u.id === id) !== undefined) {
+			alert('alaredy watching user'); return;
+		}
+		const newUser = {
+			name: 'user' + id,
+			id: id
+		}
+		setUsers([...users, newUser]);
+	}
+
+    function onSubmit(e) {
         e.preventDefault();
         if (parseInt(text)!==parseInt(text)) {
             alert('bad id');
             return;
         }
-        addUser(text);
-
+        AddUser(text);
         setText('');
     }
 
