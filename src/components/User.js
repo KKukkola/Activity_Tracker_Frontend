@@ -10,14 +10,18 @@ const User = ({ user }) => {
     const {users, setUsers} = useMyContext();
     
     function StatusClicked() {
-        const id = parseInt(user.id);
+        const id = parseInt(user.userId);
         console.log("clicked:  " + id)
     }
 
-    function DeleteUser() {
-		const id = parseInt(user.id);
-		setUsers(users.filter(user => user.id !== id));
-		console.log("delete", id);
+    async function DeleteUser() {
+		const id = parseInt(user.userId);
+		const response = await fetch(`http://localhost:8000/api/users/${id}`, {
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            setUsers(users.filter(user => user.userId !== id));
+		}
 	}
 
     return (
@@ -27,7 +31,7 @@ const User = ({ user }) => {
                     <img src={ingame} className="m-0 p-0 me-2" style={{width:'20px',height:'20px'}}onClick={StatusClicked} alt="status"/>
                 </div>
                 <div className="">
-                    <div className=".no-hover" style={{fontSize:'14px'}}>{user.name +' '+ user.id}</div>
+                    <div className=".no-hover" style={{fontSize:'14px'}}>{user.name +' '+ user.userId}</div>
                 </div>
                 <div className="ms-auto d-flex align-items center">
                     <button type="button" className="btn btn-close p-0 m-0" style={{width:'15px',height:'15px'}} onClick={DeleteUser}></button>

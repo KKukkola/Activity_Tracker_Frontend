@@ -11,16 +11,27 @@ const AddUsers = () => {
         setShowAdd(!showAdd);
     }
 
-	function AddUser(id) {
+	async function AddUser(id) {
 		id = parseInt(id);
-		if (users.find(u => u.id === id) !== undefined) {
+        const userObj = users.find(u=>u.userId==id);
+		if (userObj !== undefined) {
 			alert('alaredy watching user'); return;
 		}
-		const newUser = {
-			name: 'user' + id,
-			id: id
-		}
-		setUsers([...users, newUser]);
+        const payload = {userId: id};
+        const response = await fetch('http://localhost:8000/api/users', {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        const jsonResponse = await response.json();
+        if (response.status == 200) {
+            setUsers([...users, jsonResponse]);
+        } else {
+            console.log("failed to add user");
+        }
 	}
 
     function onSubmit(e) {

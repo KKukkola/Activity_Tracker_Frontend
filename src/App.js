@@ -1,10 +1,11 @@
 import LeftBar from './components/LeftBar'
 import RightBar from './components/RightBar';
 
-import MyContextProvider from './MyContext'
+import MyContextProvider, { useMyContext } from './MyContext'
+
+import mywsServer from './sockets';
 
 function App() {
-  
   return (
     <MyContextProvider>
       <div className="App">
