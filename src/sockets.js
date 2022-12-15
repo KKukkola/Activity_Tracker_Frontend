@@ -9,8 +9,9 @@ let handlers = [];
 //handling message event
 mywsServer.onmessage = function(event) {
     const { data } = event
+
     handlers.forEach(func => {
-        func(data);
+        func( JSON.parse(data) );
     });
 }
 

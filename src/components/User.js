@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
-import ingame from '../assets/ingame.png';
-// import instudio from '../assets/instudio.png'
-// import offline from '../assets/offline.png'
-// import onweb from '../assets/onweb.png'
+
+import offline from '../assets/offline.png'
 
 import { useMyContext } from '../MyContext'
 
@@ -25,10 +23,10 @@ const User = ({ user }) => {
 	}
 
     return (
-        <div className='list-group-item p-0 mb-1 container border-0' style={{fontFamily:'Lato'}}>
+        <div className='list-group-item p-0 mb-1 container border-0 userItem' data-userid={user.userId} style={{fontFamily:'Lato'}}>
             <div className="d-flex align-items-center">
                 <div className="d-flex align-items-center">
-                    <img src={ingame} className="m-0 p-0 me-2" style={{width:'20px',height:'20px'}}onClick={StatusClicked} alt="status"/>
+                    <img src={offline} className="m-0 p-0 me-2 status" style={{width:'20px',height:'20px'}}onClick={StatusClicked} alt="status"/>
                 </div>
                 <div className="">
                     <div className=".no-hover" style={{fontSize:'14px'}}>{user.name +' '+ user.userId}</div>
