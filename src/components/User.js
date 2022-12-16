@@ -5,11 +5,11 @@ import offline from '../assets/offline.png'
 import { useMyContext } from '../MyContext'
 
 const User = ({ user }) => {
-    const {users, setUsers} = useMyContext();
+    const {users, setUsers, setSelectedUser} = useMyContext();
     
     function StatusClicked() {
         const id = parseInt(user.userId);
-        console.log("clicked:  " + id)
+        setSelectedUser(id);
     }
 
     async function DeleteUser() {
