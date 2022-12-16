@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import User from './User';
 
 import { useMyContext } from '../MyContext';
@@ -13,12 +13,13 @@ const status_imgs = [offline, onweb, ingame, instudio];
 
 const Users = () => {
     const { users } = useMyContext();
+    const [lastUpdated, setLastUpdated] = useState("n/a")
 
     // Attach listener for user status updates
     
     useEffect(() => {
         let UpdateStatuses = (presences) => {
-            if (presences.userId === null || presences.userId === undefined) return;
+            // TODO: presences is a json object of id:status
             let userItems = document.getElementsByClassName("userItem");
             Array.from(userItems).forEach(userItem => {
                 const statusElement = userItem.querySelector(".status");
@@ -26,7 +27,7 @@ const Users = () => {
                 const status = presences[userId];
                 statusElement.src = status_imgs[status];
             })
-            console.log("Statuses Updated.");
+            setLastUpdated(new Date().toLocaleTimeString());
         }
         AddHandler(UpdateStatuses);
         return function cleanup() {
@@ -39,6 +40,7 @@ const Users = () => {
             { 
                 users.map((user) => { return users.length > 0 ? <User key={user.userId} user={user} /> : "No Users"}) 
             }
+            <div style={{textAlign:"center",fontSize:"0.75rem"}}>updated: {lastUpdated}</div>
         </ul>
     )
 }
