@@ -18,6 +18,7 @@ const Users = () => {
     
     useEffect(() => {
         let UpdateStatuses = (presences) => {
+            if (presences.userId === null || presences.userId === undefined) return;
             let userItems = document.getElementsByClassName("userItem");
             Array.from(userItems).forEach(userItem => {
                 const statusElement = userItem.querySelector(".status");
