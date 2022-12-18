@@ -19,7 +19,7 @@ const Users = () => {
     
     useEffect(() => {
         let UpdateStatuses = (presences) => {
-            // TODO: presences is a json object of id:status
+            // TODO: check that presences is a json object of id:status
             let userItems = document.getElementsByClassName("userItem");
             Array.from(userItems).forEach(userItem => {
                 const statusElement = userItem.querySelector(".status");
